@@ -9,11 +9,24 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    private let myView = View()
+    
+    // if doing programmatic layout implement and setup the view in loadView()
+    // loadView() sets up the initial view of the controller
+    // do not call super when using overriding loadView()
+    
+    override func loadView() {
+        view = myView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.backgroundColor = .systemBackground
+        
+       // view.resetButton.addTarget(self, action: #selector(resetAppCollor(_:)), for: .touchUpInside)
     }
+
 
 
 }
