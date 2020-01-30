@@ -9,10 +9,14 @@
 import UIKit
 
 class View: UIView {
-
-let defaultMessage = "COLOR GUESSING GAME"
-
-let defaultMessage2 = "Pick button with color that containts the most of it on screen above."
+    
+    public var redValue = CGFloat.random(in: 0...1)
+    public var greenValue = CGFloat.random(in: 0...1)
+    public var blueValue = CGFloat.random(in: 0...1)
+    
+    let defaultMessage = "COLOR GUESSING GAME"
+    
+    let defaultMessage2 = "Pick button with color that containts the most of it on screen above."
     
     // create a label
     // LAZY VAR - creates after my main instance will be created
@@ -29,7 +33,8 @@ let defaultMessage2 = "Pick button with color that containts the most of it on s
     
     public lazy var imageView: UIImageView = {
         let displayedColor = UIImageView()
-        displayedColor.backgroundColor = .systemRed
+        displayedColor.layer.borderColor = UIColor.black.cgColor
+        displayedColor.backgroundColor = UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: CGFloat.random(in: 0...1))
         return displayedColor
     }()
     
@@ -40,16 +45,16 @@ let defaultMessage2 = "Pick button with color that containts the most of it on s
     }()
     
     public lazy var buttonBlue: UIButton = {
-           let button2 = UIButton()
-           button2.backgroundColor = .systemBlue
-           return button2
-       }()
+        let button2 = UIButton()
+        button2.backgroundColor = .systemBlue
+        return button2
+    }()
     
     public lazy var buttonGreen: UIButton = {
-           let button3 = UIButton()
-           button3.backgroundColor = .systemGreen
-           return button3
-       }()
+        let button3 = UIButton()
+        button3.backgroundColor = .systemGreen
+        return button3
+    }()
     
     public lazy var horizontalStackView: UIStackView = {
         let stackView = UIStackView()
@@ -75,18 +80,18 @@ let defaultMessage2 = "Pick button with color that containts the most of it on s
     }()
     
     // init(frame: ) gets called if view is done programmatically
-      override init(frame: CGRect) {
-          super.init(frame: UIScreen.main.bounds)
-          commonInit()
-      }
-
-      // if this view get initialized from storyboard
-      // this initializer gets called
-      // with coder will be called if we have visual Main.Storyboard
-      required init?(coder: NSCoder) {
-          super.init(coder: coder)
-          commonInit()
-      }
+    override init(frame: CGRect) {
+        super.init(frame: UIScreen.main.bounds)
+        commonInit()
+    }
+    
+    // if this view get initialized from storyboard
+    // this initializer gets called
+    // with coder will be called if we have visual Main.Storyboard
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
     
     // gets called if we used code to create a storyboard
     private func commonInit() {
@@ -102,7 +107,7 @@ let defaultMessage2 = "Pick button with color that containts the most of it on s
         addSubview(messageLabel)
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-        messageLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
+            messageLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50),
             messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
         ])
@@ -125,7 +130,7 @@ let defaultMessage2 = "Pick button with color that containts the most of it on s
         horizontalStackView.addArrangedSubview(buttonRed)
         horizontalStackView.addArrangedSubview(buttonBlue)
         horizontalStackView.addArrangedSubview(buttonGreen)
-    horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonRed.translatesAutoresizingMaskIntoConstraints = false
         buttonBlue.translatesAutoresizingMaskIntoConstraints = false
         buttonGreen.translatesAutoresizingMaskIntoConstraints = false
@@ -135,7 +140,6 @@ let defaultMessage2 = "Pick button with color that containts the most of it on s
             horizontalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             horizontalStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             horizontalStackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.1),
-            //horizontalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 40)
         ])
         
         horizontalStackView.distribution = .fillEqually
@@ -144,16 +148,15 @@ let defaultMessage2 = "Pick button with color that containts the most of it on s
     }
     
     private func setupMessage2LabelConstraints() {
-          // add the message label to the MainView
-          addSubview(messageLabel2)
-          messageLabel2.translatesAutoresizingMaskIntoConstraints = false
-          NSLayoutConstraint.activate([
+        // add the message label to the MainView
+        addSubview(messageLabel2)
+        messageLabel2.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
             messageLabel2.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 40),
             messageLabel2.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             messageLabel2.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            //messageLabel2.heightAnchor.constraint(equalTo: heightAnchor, constant: 30)
-          ])
-      }
+        ])
+    }
     
     private func setupResetButtonConstraints() {
         addSubview(resetButton)
